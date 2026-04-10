@@ -16,15 +16,14 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "7.3.0",
-    "@prisma/client": "7.3.0",
+    "@prisma/client": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "next": "^14.2.26",
     "pg": "^8.13.1",
-    "prisma": "7.3.0",
+    "prisma": "^6.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
