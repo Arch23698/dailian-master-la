@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// API基础URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+// API基础URL - 改为相对路径
+const API_BASE_URL = '/api';  // ← 原来是 'http://localhost:3001/api'
+
 
 interface Order {
   id: number;
