@@ -1,0 +1,39 @@
+{
+  "name": "nextapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "api": "node server-fixed.cjs",
+    "dev:all": "concurrently \"npm run dev\" \"npm run api\"",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "npx prisma db seed",
+    "db:reset": "prisma migrate reset && npm run db:seed"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.7.0",
+    "@prisma/client": "7.3.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "next": "^14.2.25",
+    "prisma": "7.3.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.39",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

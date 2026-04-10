@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  phone       String   @unique
+  role        Role     @default(BOTH)
+  balance     Float    @default(0)
+  deposit     Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  ordersPosted Order[] @relation("postedOrders")
+  ordersAccepted Order[] @relation("acceptedOrders")
+}
+
+model Game {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  icon        String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orders      Order[]
+}
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  orderNumber     String   @unique
+  gameId          Int
+  game            Game     @relation(fields: [gameId], references: [id])
+  region          String
+  currentRank     String
+  targetRank      String
+  requirements    String
+  price           Float
+  securityDeposit Float
+  status          OrderStatus @default(PENDING)
+  posterId        Int
+  poster          User     @relation("postedOrders", fields: [posterId], references: [id])
+  accepterId      Int?
+  accepter        User?    @relation("acceptedOrders", fields: [accepterId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum Role {
+  POSTER
+  ACCEPTER
+  BOTH
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
