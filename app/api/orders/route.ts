@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'  // ← 添加这一行！
+
 // 直接定义枚举，避免导入问题
 const OrderStatus = {
   PENDING: 'PENDING',
@@ -8,6 +10,8 @@ const OrderStatus = {
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED'
 } as const
+// ... 其余代码不变
+
 
 const Role = {
   POSTER: 'POSTER',
