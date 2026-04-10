@@ -5,7 +5,24 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 // API基础URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = '/api';  // ← 修复硬编码地址
+
+// 在handleAcceptOrder函数中添加调试日志：
+const handleAcceptOrder = async () => {
+  // ... 代码 ...
+  
+  console.log('接单请求:', `${API_BASE_URL}/orders/accept`, {
+    orderId: order.id,
+    accepterId: 2
+  });
+
+  const response = await fetch(`${API_BASE_URL}/orders/accept`, {
+    // ... 请求配置 ...
+  });
+
+  console.log('接单响应:', response.status, data);
+  // ... 其余代码 ...
+};
 
 interface Order {
   id: number;
