@@ -11,7 +11,9 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:seed": "npx prisma db seed",
-    "db:reset": "prisma migrate reset && npm run db:seed"
+    "db:reset": "prisma migrate reset && npm run db:seed",
+    "prebuild": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.3.0",
@@ -20,7 +22,8 @@
     "@types/express": "^5.0.6",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "next": "^14.2.26",
+    "next": "^14.2.25",
+    "pg": "^8.13.1",
     "prisma": "7.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
