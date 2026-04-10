@@ -3,13 +3,16 @@
 
 generator client {
   provider = "prisma-client-js"
-  engineType = "binary"
+  // 移除自定义output路径，使用默认位置
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // url在prisma.config.ts中配置
 }
+
+// ... 模型定义保持不变 ...
+
 
 model User {
   id          Int      @id @default(autoincrement())
