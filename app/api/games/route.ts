@@ -1,12 +1,18 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'  // ← 添加这一行！
+
 // GET /api/games - 获取游戏列表
 export async function GET() {
   try {
     const games = await prisma.game.findMany({
       orderBy: {
         createdAt: 'desc'
+      }
+    })
+    // ... 其余代码不变
+   createdAt: 'desc'
       }
     })
 
