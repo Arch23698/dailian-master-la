@@ -68,4 +68,23 @@ enum OrderStatus {
   COMPLETED
   CANCELLED
 }
+// 这里的 url 必须对应你刚才在 Neon 申请的数据库连接
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 订单表
+model Order {
+  id          String   @id @default(cuid())
+  gameName    String   // 游戏名称 (如：王者荣耀)
+  title       String   // 订单标题/要求
+  price       Float    // 代练价格
+  margin      Float    // 安全保证金
+  status      String   @default("PENDING") // 状态：PENDING(待接单), ACCEPTED(已接单)
+  createdAt   DateTime @default(now())
+}
