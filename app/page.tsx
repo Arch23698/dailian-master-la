@@ -1,5 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
+const API_BASE_URL = '/api';  // ← 修复硬编码地址
+
+// 在handleSubmit函数中添加调试日志：
+const handleSubmit = async (e: React.FormEvent) => {
+  // ... 代码 ...
+  
+  console.log('发布订单请求:', `${API_BASE_URL}/orders`, {
+    method: "POST",
+    body: {
+      ...formData,
+      posterId: 1,
+      gameId: parseInt(formData.gameId),
+      price: parseFloat(formData.price),
+      securityDeposit: parseFloat(formData.securityDeposit),
+    }
+  });
+  // ... 其余代码 ...
+};
+
 
 export default function Home() {
   // 模拟轮播图数据
