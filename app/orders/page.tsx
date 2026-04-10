@@ -202,7 +202,7 @@ export default function OrdersPage() {
                       ¥{order.price}
                     </div>
                     <div className="text-sm text-gray-500">
-                      保证金: ¥{order.securityDeposit}
+                      保证金: 400¥{order.securityDeposit}
                     </div>
                   </div>
                   <button className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
