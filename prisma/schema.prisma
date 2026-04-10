@@ -1,28 +1,22 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
-  // 移除自定义output路径，使用默认位置
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-// ... 模型定义保持不变 ...
-
 
 model User {
-  id          Int      @id @default(autoincrement())
-  phone       String   @unique
-  role        Role     @default(BOTH)
-  balance     Float    @default(0)
-  deposit     Float    @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  ordersPosted Order[] @relation("postedOrders")
-  ordersAccepted Order[] @relation("acceptedOrders")
+  id             Int      @id @default(autoincrement())
+  phone          String   @unique
+  role           Role     @default(BOTH)
+  balance        Float    @default(0)
+  deposit        Float    @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  ordersPosted   Order[]  @relation("postedOrders")
+  ordersAccepted Order[]  @relation("acceptedOrders")
 }
 
 model Game {
@@ -36,10 +30,10 @@ model Game {
 }
 
 model Order {
-  id              Int      @id @default(autoincrement())
-  orderNumber     String   @unique
+  id              Int         @id @default(autoincrement())
+  orderNumber     String      @unique
   gameId          Int
-  game            Game     @relation(fields: [gameId], references: [id])
+  game            Game        @relation(fields: [gameId], references: [id])
   region          String
   currentRank     String
   targetRank      String
@@ -48,11 +42,11 @@ model Order {
   securityDeposit Float
   status          OrderStatus @default(PENDING)
   posterId        Int
-  poster          User     @relation("postedOrders", fields: [posterId], references: [id])
+  poster          User        @relation("postedOrders", fields: [posterId], references: [id])
   accepterId      Int?
-  accepter        User?    @relation("acceptedOrders", fields: [accepterId], references: [id])
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  accepter        User?       @relation("acceptedOrders", fields: [accepterId], references: [id])
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }
 
 enum Role {
@@ -66,24 +60,4 @@ enum OrderStatus {
   IN_PROGRESS
   COMPLETED
   CANCELLED
-}
-// 这里的 url 必须对应你刚才在 Neon 申请的数据库连接
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-// 订单表
-model Order {
-  id          String   @id @default(cuid())
-  gameName    String   // 游戏名称 (如：王者荣耀)
-  title       String   // 订单标题/要求
-  price       Float    // 代练价格
-  margin      Float    // 安全保证金
-  status      String   @default("PENDING") // 状态：PENDING(待接单), ACCEPTED(已接单)
-  createdAt   DateTime @default(now())
 }
